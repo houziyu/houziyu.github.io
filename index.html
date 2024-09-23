@@ -180,7 +180,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -189,8 +189,38 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+          <a href="/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -302,23 +332,20 @@
       
         
           
-            <h1 id="easy-retry部署"><a href="#easy-retry部署" class="headerlink" title="easy-retry部署"></a>easy-retry部署</h1><p>参考文档：<a target="_blank" rel="noopener" href="https://www.easyretry.com/pages/406a66/#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B">https://www.easyretry.com/pages/406a66/#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B</a></p>
-<p>1、在docker hub官网中拉取指定的版本</p>
-<p><a target="_blank" rel="noopener" href="https://hub.docker.com/r/byteblogs/easy-retry/tags">https://hub.docker.com/r/byteblogs/easy-retry/tags</a></p>
-<p>2、将镜像打tag并上传到私库中</p>
-<p>docker tag a4e033ffcbcc  harbor.clx.com&#x2F;public&#x2F;easy-retry:2.6.0</p>
-<p>docker push  harbor.clx.com&#x2F;public&#x2F;easy-retry:2.6.0</p>
-<p>3、阿里云创建DNS解析</p>
-<p>4、<a target="_blank" rel="noopener" href="http://easy.devclx.cn/easy-retry/#/dashboard/analysis">http://easy.devclx.cn/easy-retry/#/dashboard/analysis</a></p>
-<p>账号：admin</p>
-<p>密码：admin</p>
-<p>启动以下三个文件  kubectl apply -f  .</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: easy-retry-server-mysql</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: easy-retry-server-mysql</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: easy-retry-server-mysql</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: easy-retry-server-mysql</span><br><span class="line">        image: harbor.clx.com/public/easy-retry:2.6.0</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 8080</span><br><span class="line">        - containerPort: 1788</span><br><span class="line">        env:</span><br><span class="line">        - name: PARAMS</span><br><span class="line">          value: &quot;--spring.datasource.username=账号 --spring.datasource.password=密码 --spring.datasource.url=jdbc:mysql://mysqlIP地址:3306/easy_retry?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai --spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: easy-retry-server-mysql</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    app: easy-retry-server-mysql</span><br><span class="line">  ports:</span><br><span class="line">  - protocol: TCP</span><br><span class="line">    name: http</span><br><span class="line">    port: 8080</span><br><span class="line">    targetPort: 8080</span><br><span class="line">  - protocol: TCP</span><br><span class="line">    name: tcp</span><br><span class="line">    port: 1788</span><br><span class="line">    targetPort: 1788</span><br><span class="line">  type: NodePort  # 您可以根据需要更改为 LoadBalancer 或 ClusterIP</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">kind: Ingress</span><br><span class="line">apiVersion: extensions/v1beta1</span><br><span class="line">metadata: </span><br><span class="line">  name: easy-retry-ing</span><br><span class="line">  namespace: default</span><br><span class="line">spec:</span><br><span class="line">  rules:</span><br><span class="line">  - host: easy.devclx.cn</span><br><span class="line">    http:</span><br><span class="line">      paths:</span><br><span class="line">      - path: /</span><br><span class="line">        backend: </span><br><span class="line">          serviceName: easy-retry-server-mysql</span><br><span class="line">          servicePort: 8080</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-          
+          easy-retry部署参考文档：https://www.easyretry.com/pages/406a66/#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B
+1、在docker hub官网中拉取指定的版本
+https://hub.docker.com/r/byteblogs/easy-retry/tags
+2、将镜像打tag并上传到私库中
+docker tag a4e033ffcbcc  harbor.clx.com&#x2F;public&#x2F;easy-retry:2.6.0
+docker push  harbor.clx.com&#x2F;public&
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2024/09/23/easy-retry/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -436,21 +463,19 @@
       
         
           
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-          
+More info: Writing
+Run server1$ hexo ser
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2024/09/23/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -528,7 +553,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives%7C%7C%20archive">
               
                   <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
