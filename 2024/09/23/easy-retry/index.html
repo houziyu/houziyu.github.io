@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="easy-retry部署参考文档：https:&#x2F;&#x2F;www.easyretry.com&#x2F;pages&#x2F;406a66&#x2F;#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B 1、在docker hub官网中拉取指定的版本 https:&#x2F;&#x2F;hub.docker.com&#x2F;r&#x2F;byteblogs&#x2F;easy-retry&#x2F;tags 2、将镜像打tag并上传到私库中 docker tag a4e">
+<meta name="description" content="参考文档：https:&#x2F;&#x2F;www.easyretry.com&#x2F;pages&#x2F;406a66&#x2F;#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B 1、在docker hub官网中拉取指定的版本 https:&#x2F;&#x2F;hub.docker.com&#x2F;r&#x2F;byteblogs&#x2F;easy-retry&#x2F;tags 2、将镜像打tag并上传到私库中 docker tag a4e033ffcbcc  h">
 <meta property="og:type" content="article">
-<meta property="og:title" content="云雀">
+<meta property="og:title" content="easy-retry部署">
 <meta property="og:url" content="http://example.com/2024/09/23/easy-retry/index.html">
 <meta property="og:site_name" content="云雀">
-<meta property="og:description" content="easy-retry部署参考文档：https:&#x2F;&#x2F;www.easyretry.com&#x2F;pages&#x2F;406a66&#x2F;#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B 1、在docker hub官网中拉取指定的版本 https:&#x2F;&#x2F;hub.docker.com&#x2F;r&#x2F;byteblogs&#x2F;easy-retry&#x2F;tags 2、将镜像打tag并上传到私库中 docker tag a4e">
+<meta property="og:description" content="参考文档：https:&#x2F;&#x2F;www.easyretry.com&#x2F;pages&#x2F;406a66&#x2F;#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B 1、在docker hub官网中拉取指定的版本 https:&#x2F;&#x2F;hub.docker.com&#x2F;r&#x2F;byteblogs&#x2F;easy-retry&#x2F;tags 2、将镜像打tag并上传到私库中 docker tag a4e033ffcbcc  h">
 <meta property="og:locale">
-<meta property="article:published_time" content="2024-09-23T08:37:35.551Z">
-<meta property="article:modified_time" content="2024-09-23T08:37:35.552Z">
+<meta property="article:published_time" content="2024-09-23T08:51:40.381Z">
+<meta property="article:modified_time" content="2024-09-23T08:51:40.381Z">
 <meta property="article:author" content="云雀">
 <meta name="twitter:card" content="summary">
 
@@ -125,7 +125,7 @@
 
 
 
-  <title> | 云雀</title>
+  <title>easy-retry部署 | 云雀</title>
   
 
 
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">easy-retry部署</h1>
         
 
         <div class="post-meta">
@@ -291,7 +291,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-09-23T16:37:35+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-09-23T16:51:40+08:00">
                 2024-09-23
               </time>
             
@@ -329,7 +329,7 @@
       
 
       
-        <h1 id="easy-retry部署"><a href="#easy-retry部署" class="headerlink" title="easy-retry部署"></a>easy-retry部署</h1><p>参考文档：<a target="_blank" rel="noopener" href="https://www.easyretry.com/pages/406a66/#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B">https://www.easyretry.com/pages/406a66/#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B</a></p>
+        <p>参考文档：<a target="_blank" rel="noopener" href="https://www.easyretry.com/pages/406a66/#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B">https://www.easyretry.com/pages/406a66/#%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B</a></p>
 <p>1、在docker hub官网中拉取指定的版本</p>
 <p><a target="_blank" rel="noopener" href="https://hub.docker.com/r/byteblogs/easy-retry/tags">https://hub.docker.com/r/byteblogs/easy-retry/tags</a></p>
 <p>2、将镜像打tag并上传到私库中</p>
@@ -345,6 +345,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: easy-retry-server-mysql</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    app: easy-retry-server-mysql</span><br><span class="line">  ports:</span><br><span class="line">  - protocol: TCP</span><br><span class="line">    name: http</span><br><span class="line">    port: 8080</span><br><span class="line">    targetPort: 8080</span><br><span class="line">  - protocol: TCP</span><br><span class="line">    name: tcp</span><br><span class="line">    port: 1788</span><br><span class="line">    targetPort: 1788</span><br><span class="line">  type: NodePort  # 您可以根据需要更改为 LoadBalancer 或 ClusterIP</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">kind: Ingress</span><br><span class="line">apiVersion: extensions/v1beta1</span><br><span class="line">metadata: </span><br><span class="line">  name: easy-retry-ing</span><br><span class="line">  namespace: default</span><br><span class="line">spec:</span><br><span class="line">  rules:</span><br><span class="line">  - host: easy.devclx.cn</span><br><span class="line">    http:</span><br><span class="line">      paths:</span><br><span class="line">      - path: /</span><br><span class="line">        backend: </span><br><span class="line">          serviceName: easy-retry-server-mysql</span><br><span class="line">          servicePort: 8080</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -428,17 +429,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -480,22 +472,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#easy-retry%E9%83%A8%E7%BD%B2"><span class="nav-number">1.</span> <span class="nav-text">easy-retry部署</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
